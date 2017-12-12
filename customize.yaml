@@ -1,1 +1,22 @@
-
+binary_sensor.nest_thermostat_nest_fan:
+  hidden: true
+binary_sensor.nest_thermostat_nest_has_leaf:
+  hidden: true
+binary_sensor.nest_thermostat_nest_is_locked:
+  hidden: true
+binary_sensor.nest_thermostat_nest_is_using_emergency_heat:
+  hidden: true
+sensor.nest_thermostat_nest_target:
+  hidden: true
+sensor.nest_thermostat_nest_operation_mode:
+  hidden: true
+binary_sensor.nest_thermostat_nest_online:
+  hidden: true
+#light.bedroom:
+#  friendly_name: Bedroom Lights
+#sensor.time:
+#  hidden: true
+#sensor.cpu_use:
+#  friendly_name: CPU Usage
+#sensor.ram_use:
+#  friendly_name: RAM Usage
