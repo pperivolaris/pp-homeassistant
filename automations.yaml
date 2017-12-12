@@ -1,0 +1,104 @@
+- id: porch_night_light_on
+  alias: 'Porch light ON 15 minutes before sunset'
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:15:00"
+  action:
+    service: homeassistant.turn_on
+    entity_id:
+      - group.night_lights
+
+- id: porch_light_on_home_late
+  alias: 'Porch light ON after getting home late'
+  trigger:
+  - platform: state
+    entity_id: !secret philip
+    to: 'home'
+  - platform: state
+    entity_id: !secret anya
+    to: 'home'
+  condition:
+    condition: time
+    after: '23:00:00'
+    before: '05:00:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id:
+      - group.night_lights
+
+- id: all_lights_off
+  alias: 'Lights OFF at 11 pm'
+  trigger:
+    platform: time
+    at: '23:00:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id:
+      - group.night_lights
+      - switch.stair_lights
+
+- id: presence_notification
+  alias: 'Presence Notifications'
+  trigger:
+    platform: state
+    entity_id: !include devices.yaml
+  action:
+    service: notify.pushbullet
+    data_template:
+      title: "HASS Presence Notification"
+      message: >  
+        {{ trigger.to_state.attributes.friendly_name }} is {% if trigger.to_state.state == 'home' %}back{% else %}away{% endif %}.
+
+- id: stair_lights_on_when_coming_home
+  alias: 'Stair lights ON when someone ARRIVES home'
+  trigger:
+  - platform: state
+    entity_id: !secret philip
+    to: 'home'
+  - platform: state
+    entity_id: !secret anya
+    to: 'home'
+  condition:
+    condition: sun
+    after: sunset
+    after_offset: "-00:15:00"
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.stair_lights
+
+- id: stair_lights_on_when_already_home
+  alias: 'Stair lights ON only when someone IS home'
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:15:00"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: !secret philip
+        state: 'home'
+      - condition: state
+        entity_id: !secret anya
+        state: 'home'
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.stair_lights
+
+# - id: stair_lights_off_all_gon
+#   alias: 'Stair lights ON when someone ARRIVES home'
+#   trigger:
+#   - platform: state
+#     entity_id: !secret philip
+#     to: 'home'
+#   - platform: state
+#     entity_id: !secret anya
+#     to: 'home'
+#   condition:
+#     condition: sun
+#     after: sunset
+#     after_offset: "-00:15:00"
+#   action:
+#     service: homeassistant.turn_on
+#     entity_id: switch.stair_lights

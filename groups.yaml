@@ -1,0 +1,7 @@
+night_lights:
+  name: Night Lights
+  icon: mdi:ceiling-light
+  view: yes
+  entities:
+    - light.porch
+    - switch.christmas_lights
