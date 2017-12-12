@@ -1,16 +1,16 @@
-binary_sensor.nest_thermostat_nest_fan:
+binary_sensor.nest_fan:
   hidden: true
-binary_sensor.nest_thermostat_nest_has_leaf:
+binary_sensor.nest_has_leaf:
   hidden: true
-binary_sensor.nest_thermostat_nest_is_locked:
+binary_sensor.nest_is_locked:
   hidden: true
-binary_sensor.nest_thermostat_nest_is_using_emergency_heat:
+binary_sensor.nest_is_using_emergency_heat:
   hidden: true
-sensor.nest_thermostat_nest_target:
+sensor.nest_target:
   hidden: true
-sensor.nest_thermostat_nest_operation_mode:
+sensor.nest_operation_mode:
   hidden: true
-binary_sensor.nest_thermostat_nest_online:
+binary_sensor.nest_online:
   hidden: true
 #light.bedroom:
 #  friendly_name: Bedroom Lights
