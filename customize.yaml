@@ -11,7 +11,7 @@ sensor.nest_thermostat_target:
 sensor.nest_thermostat_operation_mode:
   hidden: true
 binary_sensor.nest_thermostat_online:
-  hidden: true
+  hidden: false
 #light.bedroom:
 #  friendly_name: Bedroom Lights
 #sensor.time:
